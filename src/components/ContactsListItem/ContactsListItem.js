@@ -1,4 +1,7 @@
+import { connect } from "react-redux";
+
 import styles from "./ContactsListItem.module.css";
+import contactsActions from "../../redux/contacts/contacts-actions";
 
 const ContactsListItem = ({ contacts, onDeleteButtonClick }) => {
   return contacts.map(({ id, name, number }) => (
@@ -10,4 +13,19 @@ const ContactsListItem = ({ contacts, onDeleteButtonClick }) => {
     </li>
   ));
 };
-export default ContactsListItem;
+
+const mapStateToProps = (state) => {
+  const { contactsReduser, filterReducer } = state.contacts;
+  const visibleContacts = contactsReduser.filter((contact) =>
+    contact.name.toLowerCase().includes(filterReducer.toLowerCase())
+  );
+  return {
+    contacts: visibleContacts,
+    // contacts: state.contacts.contactsReduser,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  onDeleteButtonClick: (id) =>
+    dispatch(contactsActions.deleteContactAction(id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsListItem);
