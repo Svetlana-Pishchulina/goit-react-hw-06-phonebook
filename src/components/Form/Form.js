@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// import { connect } from "react-redux";
 // import shortid from "shortid";
 
 import styles from "./Form.module.css";
@@ -11,9 +13,11 @@ const useForm = (key) => {
   return [state, setState];
 };
 
-const Form = ({ propOnSubmit }) => {
+const Form = () => {
   const [name, setName] = useForm("name");
   const [number, setNumber] = useForm("number");
+  const contacts = useSelector((state) => state.contacts.contactsReduser);
+  const dispatch = useDispatch();
 
   // const id = shortid.generate();
 
@@ -36,7 +40,12 @@ const Form = ({ propOnSubmit }) => {
   // const currentContact = { name, number, id };
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    propOnSubmit(name, number);
+
+    if (contacts.find((contact) => contact.name === name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    dispatch(contactsActions.saveContactAction(name, number));
     reset();
   };
 
@@ -80,15 +89,13 @@ const Form = ({ propOnSubmit }) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   if (state.contacts.contactsReduser.find((contact) => contact.name === name)) {
-//     alert(`${name} is already in contacts`);
-//     return;
-//   }
-// };
+// const mapStateToProps = (state) => ({
+//   contacts: state.contacts.contactsReduser,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  propOnSubmit: (name, number) =>
-    dispatch(contactsActions.saveContactAction(name, number)),
-});
-export default connect(null, mapDispatchToProps)(Form);
+// const mapDispatchToProps = (dispatch) => ({
+//   propOnSubmit: (name, number) =>
+//     dispatch(contactsActions.saveContactAction(name, number)),
+// });
+// export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default Form;

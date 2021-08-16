@@ -56,20 +56,12 @@ function App() {
   return (
     <>
       <Section title="Phonebook">
-        <Form
-        // propOnSubmit={formSubmitHandler}
-        />
+        <Form />
       </Section>
       <Section title="Contacts">
-        <Filter
-        // value={filter}
-        // onChange={onChangeSearchInput}
-        />
+        <Filter />
         <ContactsList>
-          <ContactsListItem
-          // contacts={visibleContacts}
-          // onDeleteButtonClick={deleteContact}
-          ></ContactsListItem>
+          <ContactsListItem />
         </ContactsList>
       </Section>
     </>
