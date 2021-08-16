@@ -1,4 +1,3 @@
-// import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./ContactsListItem.module.css";
@@ -10,7 +9,6 @@ import {
 
 const ContactsListItem = () => {
   const contacts = useSelector((state) => {
-    // const { contactsReduser, filterReducer } = state.contacts;
     const contactsReducer = getContactsReducer(state);
     const filterReducer = getFilterReducer(state);
     const visibleContacts = contactsReducer.filter((contact) =>
@@ -33,19 +31,4 @@ const ContactsListItem = () => {
   ));
 };
 
-// const mapStateToProps = (state) => {
-//   const { contactsReduser, filterReducer } = state.contacts;
-//   const visibleContacts = contactsReduser.filter((contact) =>
-//     contact.name.toLowerCase().includes(filterReducer.toLowerCase())
-//   );
-//   return {
-//     contacts: visibleContacts,
-//     // contacts: state.contacts.contactsReduser,
-//   };
-// };
-// const mapDispatchToProps = (dispatch) => ({
-//   onDeleteButtonClick: (id) =>
-//     dispatch(contactsActions.deleteContactAction(id)),
-// });
-// export default connect(mapStateToProps, mapDispatchToProps)(ContactsListItem);
 export default ContactsListItem;

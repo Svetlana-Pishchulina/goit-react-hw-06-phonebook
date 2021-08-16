@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-// import { connect } from "react-redux";
-// import shortid from "shortid";
-
 import styles from "./Form.module.css";
 import contactsActions from "../../redux/contacts/contacts-actions";
 import { getContactsReducer } from "../../redux/contacts/contacts-selection";
@@ -19,8 +16,6 @@ const Form = () => {
   const [number, setNumber] = useForm("number");
   const contacts = useSelector(getContactsReducer);
   const dispatch = useDispatch();
-
-  // const id = shortid.generate();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -38,7 +33,6 @@ const Form = () => {
     }
   };
 
-  // const currentContact = { name, number, id };
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -90,13 +84,4 @@ const Form = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   contacts: state.contacts.contactsReduser,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   propOnSubmit: (name, number) =>
-//     dispatch(contactsActions.saveContactAction(name, number)),
-// });
-// export default connect(mapStateToProps, mapDispatchToProps)(Form);
 export default Form;
