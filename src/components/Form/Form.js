@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./Form.module.css";
 import contactsActions from "../../redux/contacts/contacts-actions";
+import { getContactsReducer } from "../../redux/contacts/contacts-selection";
 
 const useForm = (key) => {
   const [state, setState] = useState("");
@@ -16,7 +17,7 @@ const useForm = (key) => {
 const Form = () => {
   const [name, setName] = useForm("name");
   const [number, setNumber] = useForm("number");
-  const contacts = useSelector((state) => state.contacts.contactsReduser);
+  const contacts = useSelector(getContactsReducer);
   const dispatch = useDispatch();
 
   // const id = shortid.generate();
